@@ -16,6 +16,7 @@ a {
   color: #787878;
   text-decoration: none;
 }
+
 `;
 
 export default GlobalStyle;
