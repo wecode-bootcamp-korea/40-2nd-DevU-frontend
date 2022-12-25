@@ -1,0 +1,92 @@
+{
+  "main_category": "2",
+  "sub_category": "5",
+  "title": "자바스크립트 2023",
+  "image_url": "https://img.ridicdn.net/cover/754036246/xxlarge#1",
+  "published_date": "2022.10.07",
+  "offline_price": 17500,
+  "online_price": 11070,
+  "author": "김난도",
+  "publisher": "미래의 창",
+  "description": "95퍼센트의 인간은 타고난 유전자와 본성의 꼭두각시로 살아간다. 그래서 평생 평범함을 벗어나지 못하고 불행하게 산다. 본성에 따라 결정된 인생을 사는 자, 이들은 ‘순리자’다. 그러나 5퍼센트의 인간은 다르다. 그들은 타고난 유전자와 본성을 역행해 경제적 자유와 행복을 쟁취한다. 이들이 바로 ‘역행자’다.95퍼센트의 인간은 타고난 유전자와 본성의 꼭두각시로 살아간다. 그래서 평생 평범함을 벗어나지 못하고 불행하게 산다. 본성에 따라 결정된 인생을 사는 자, 이들은 ‘순리자’다. 그러나 5퍼센트의 인간은 다르다. 그들은 타고난 유전자와 본성을 역행해 경제적 자유와 행복을 쟁취한다. 이들이 바로 ‘역행자’다.95퍼센트의 인간은 타고난 유전자와 본성의 꼭두각시로 살아간다. 그래서 평생 평범함을 벗어나지 못하고 불행하게 산다. 본성에 따라 결정된 인생을 사는 자, 이들은 ‘순리자’다. 그러나 5퍼센트의 인간은 다르다. 그들은 타고난 유전자와 본성을 역행해 경제적 자유와 행복을 쟁취한다. 이들이 바로 ‘역행자’다.",
+  "publisher_review": "머리는 너를 잊어도, 심장은 너를 잊지 않았어.세상에 단 한 번뿐인 하루, 세상에 단 하나뿐인 사랑 촘촘히 쌓아 올린 서사 위에서 불꽃처럼 터지는 강렬한 전율! 머리는 너를 잊어도, 심장은 너를 잊지 않았어.세상에 단 한 번뿐인 하루, 세상에 단 하나뿐인 사랑 촘촘히 쌓아 올린 서사 위에서 불꽃처럼 터지는 강렬한 전율!95퍼센트의 인간은 타고난 유전자와 본성의 꼭두각시로 살아간다. 그래서 평생 평범함을 벗어나지 못하고 불행하게 산다. 본성에 따라 결정된 인생을 사는 자, 이들은 ‘순리자’다. 그러나 5퍼센트의 인간은 다르다. 그들은 타고난 유전자와 본성을 역행해 경제적 자유와 행복을 쟁취한다. 이들이 바로 ‘역행자’다.95퍼센트의 인간은 타고난 유전자와 본성의 꼭두각시로 살아간다. 그래서 평생 평범함을 벗어나지 못하고 불행하게 산다. 본성에 따라 결정된 인생을 사는 자, 이들은 ‘순리자’다. 그러나 5퍼센트의 인간은 다르다. 그들은 타고난 유전자와 본성을 역행해 경제적 자유와 행복을 쟁취한다. 이들이 바로 ‘역행자’다.",
+  "list": "1장 : 2022 대한민국\n\n나노사회로의 전환\n대투자 시대 생존법\n슬기로운 엔데믹 생활\n\n2장 : 2023 트렌드\n\nRedistribution of the Average 평균 실종\nArrival of a New Office Culture: ‘Office Big Bang’ 오피스 빅뱅\nBorn Picky Cherry-sumers 체리슈머",
+  "reviews_section": {
+    "rating": 4.4,
+    "num_reviews": 3,
+    "reviews": [
+      {
+        "rating": "5",
+        "user_id": "sunyoung",
+        "created_at": "2022.12.17",
+        "review": "가볍게 읽기 좋아요"
+      },
+      {
+        "rating": "4",
+        "user_id": "woojin",
+        "created_at": "2022.12.16",
+        "review": "추천도서입니다."
+      },
+      {
+        "rating": "1",
+        "user_id": "jinjoo",
+        "created_at": "2022.12.10",
+        "review": "비추합니다. 읽지마세요."
+      }
+    ]
+  },
+
+  "recommendBooks": [
+    {
+      "title": "메타버스 새로운 기회",
+      "image": "https://img.ridicdn.net/cover/1314000090/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "눈 떠보니 선진국",
+      "image": "https://img.ridicdn.net/cover/1890000237/large#1",
+      "author": "김난도"
+    },
+
+    {
+      "title": "진저의 K-POP 영어",
+      "image": "https://img.ridicdn.net/cover/1314000089/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "방구석 심리학 실험실",
+      "image": "https://img.ridicdn.net/cover/1890000238/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "하버드 멘토의 감정 설명서",
+      "image": "https://img.ridicdn.net/cover/1314000081/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "유튜브 마케팅 인사이트",
+      "image": "https://img.ridicdn.net/cover/1890000239/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "투자의 신세계",
+      "image": "https://img.ridicdn.net/cover/1314000099/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "두 발로 선 경제",
+      "image": "https://img.ridicdn.net/cover/1890000240/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "시장을 읽는 부동산 투자",
+      "image": "https://img.ridicdn.net/cover/1314000075/large#1",
+      "author": "김난도"
+    },
+    {
+      "title": "이그노벨상",
+      "image": "https://img.ridicdn.net/cover/1890000286/large#1",
+      "author": "김난도"
+    }
+  ]
+}
