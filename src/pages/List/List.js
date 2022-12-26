@@ -46,22 +46,18 @@ const List = () => {
 export default List;
 
 const BookListContainer = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  ${props => props.theme.variables.flex('row', 'flex-start')}
   flex-wrap: wrap;
-  padding-left: 23%;
-  padding-right: 23%;
+  margin-left: 370px;
+  margin-right: 370px;
+  padding: 0 132px;
 `;
 
 const BookContainer = styled.li`
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  ${props => props.theme.variables.flex('column', 'center', 'flex-start')}
   margin: 30px 5px;
   height: 410p;
+  list-style-type: none;
 `;
 
 const BookImage = styled.img`
