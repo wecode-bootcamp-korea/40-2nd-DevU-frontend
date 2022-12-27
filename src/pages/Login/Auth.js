@@ -46,7 +46,7 @@ const Auth = () => {
 
   useEffect(() => {
     getToken();
-  });
+  }, []);
 
   return <AuthPage>kakao 로그인 진행 중</AuthPage>;
 };

@@ -5,7 +5,6 @@ const TopButton = () => {
   const [showButton, setShowButton] = useState(false);
 
   const scrollToTop = () => {
-    console.log('top!');
     window.scroll({
       top: 0,
       behavior: 'smooth',
