@@ -8,7 +8,7 @@ const CategoryMenu = () => {
       {CATEGORY_MENU.map(menu => {
         return (
           <ButtonWrapper key={menu.id}>
-            <CategoryButton to="">
+            <CategoryButton to="/list">
               <CategoryIcon src={menu.imageSrc} />
             </CategoryButton>
             <CategoryTitle>{menu.title}</CategoryTitle>
@@ -38,6 +38,11 @@ const CategoryButton = styled(Link)`
   width: 65px;
   height: 65px;
   border-radius: 70%;
+  :hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+    border: 3px solid #1e9eff;
+  }
 `;
 
 const CategoryIcon = styled.img`
