@@ -5,6 +5,19 @@ import styled from 'styled-components';
 const MyLibrary = () => {
   const [myBookLibrary, setMyBookLibrary] = useState([]);
 
+  const BookClickHandler = () => {
+    useEffect(() => {
+      fetch('/data/bookLibrary.json', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(setMyBookLibrary);
+    }, []);
+  };
+
   useEffect(() => {
     fetch('/data/bookLibrary.json', {
       method: 'GET',
@@ -26,7 +39,7 @@ const MyLibrary = () => {
       <MainWrapper>
         <MyBookWrapper>
           {myBookLibrary.map(({ id, imageUrl, title }) => (
-            <ReadButton key={id} to="MyBook">
+            <ReadButton key={id} to="/viewer" onClick={BookClickHandler}>
               <ImageWrapper>
                 <LibraryImage src={imageUrl} alt={title} />
               </ImageWrapper>
