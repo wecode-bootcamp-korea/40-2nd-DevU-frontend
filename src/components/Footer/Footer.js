@@ -20,10 +20,10 @@ const Footer = () => {
             <MainCategory>
               {FIRST_MAIN_CATEGORIES.map(category => (
                 <Link key={category.id}>
-                  <CategoryList>
+                  <FirstCategoryList>
                     <FirstCategoryImage icon={category.icon} />
                     <span>{category.category}</span>
-                  </CategoryList>
+                  </FirstCategoryList>
                 </Link>
               ))}
             </MainCategory>
@@ -84,9 +84,9 @@ const FooterSection = styled.div`
 const FooterMain = styled.footer`
   ${({ theme }) => theme.variables.flex(null, 'space-between', 'flex-start')};
   flex-wrap: wrap;
-  max-width: 1170px;
+  width: 80vw;
   margin: 0 auto;
-  padding: 41px 26px 20px;
+  padding: 41px 10px 20px;
 `;
 
 const FooterContents = styled.div`
@@ -103,6 +103,12 @@ const MainCategory = styled.ul`
   width: 185px;
 `;
 
+const FirstCategoryImage = styled(FontAwesomeIcon)`
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+`;
+
 const CategoryList = styled.li`
   ${({ theme }) => theme.variables.flex()};
   margin: 10px 0;
@@ -110,21 +116,21 @@ const CategoryList = styled.li`
   font-size: 13px;
   font-weight: 700;
   line-height: 16px;
+`;
 
+const FirstCategoryList = styled(CategoryList)`
   &:hover {
     opacity: 0.6;
   }
 `;
 
-const FirstCategoryImage = styled(FontAwesomeIcon)`
-  width: 20px;
-  height: 20px;
-  margin-right: 6px;
-`;
-
 const RestCategoryList = styled(CategoryList)`
   margin: 6px 0;
   font-weight: 400;
+
+  &:hover {
+    opacity: 0.6;
+  }
 
   &:nth-child(2) {
     margin-top: 0px;

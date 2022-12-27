@@ -17,11 +17,15 @@ const BUTTON_LIST = [
   { id: 2, icon: faAddressBook },
   { id: 3, icon: faUser },
 ];
+
 const Nav = () => {
   const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
-    localStorage.getItem('token') ? setIsUser(true) : setIsUser(false);
+    setTimeout(() => {
+      const isLogin = !!localStorage.getItem('token');
+      setIsUser(isLogin);
+    }, 500);
   }, []);
 
   return (
@@ -62,9 +66,8 @@ const Nav = () => {
 export default Nav;
 
 const NavSection = styled.div`
-  max-width: 1170px;
+  width: 80vw;
   margin: auto;
-  padding: 0 18px;
 `;
 
 const UserMenuSection = styled.div`
@@ -88,7 +91,7 @@ const UserMenuButton = styled(Link)`
 
 const Navigator = styled.nav`
   ${({ theme }) => theme.variables.flex(null, 'space-between')}
-  padding: 16px 0 16px 22px;
+  padding: 16px 0 16px;
 `;
 
 const Title = styled.h1`
