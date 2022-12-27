@@ -5,7 +5,13 @@ import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
 import variables from './styles/variables';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import Router from './Router';
+
+library.add(fab, far, fas);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

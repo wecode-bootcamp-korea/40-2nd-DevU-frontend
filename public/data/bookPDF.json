@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "타입스크립트 넌 내 타입",
+    "index": [
+      { "title": "1. typescript란" },
+      { "title": "2. typescript 설치하기" },
+      { "title": "3. 자바스크립트가 가지지 못한 녀석, 타입" },
+      { "title": "4. 배열과 튜플" },
+      { "title": "5. 함수와 클래스" },
+      { "title": "6. 객체의 타입을 정하자, 인터페이스" },
+      { "title": "7. 유연하게 타입을 지정하려면 제네릭!" },
+      { "title": "8. 타입스크립트로의 이주, 마이그레이션" }
+    ],
+    "contents": "Figure 3 presents the average delay and packet delivery ratio in WMN with in- creasing number of gateways keeping number of nodes fixed to 50. Our method is presented by the red color whereas the green color represents the NGW technique and the blue color is the MLI technique. Figure 4 presents the average delay and packet delivery ration with increasing number of nodes keeping the number of gateways fixed to 5. As a consequence of the increase in the number of nodes there will be more number of nodes in each partition. Multiple gateways without clustering result in managing bigger tables at gateways hence backend traffic becomes significantly higher across the WMN. In contrast in our method backend traffic is restricted within the gateway span/partition/cluster. The active routing table entry at the gateways is significantly small because it manages on- ly the details of nodes within the gateways partition."
+  }
+]
