@@ -9,28 +9,23 @@ import Recommend from './Component/Recommend';
 import Introduction from './Component/Introduction';
 
 const Detail = () => {
-  const [bookData, setBookData] = useState([]);
-  const { bookId } = useParams();
+  const [bookData, setBookData] = useState({});
+  const params = useParams();
+  const bookId = params.id;
 
   useEffect(() => {
     getData();
   }, []);
 
-  //  *TODO : `http://10.58.52.196:3000/books/${bookId}`;
-
   const getData = () => {
-    fetch('/data/DetailData.json', { method: 'GET' })
-      .then(response => {
-        return response.json();
-      })
-      .then(result => {
-        return setBookData(result);
-      });
+    fetch(`http://10.58.52.196:3000/books/details/${bookId}`, { method: 'GET' })
+      .then(response => response.json())
+      .then(result => setBookData(result[0]));
   };
 
   const token = localStorage.getItem('token');
 
-  const addToCart = () => {
+  const goToOrder = () => {
     fetch('http://10.58.52.204:8000/cart/add', {
       method: 'POST',
       headers: {
@@ -39,7 +34,9 @@ const Detail = () => {
       },
       body: JSON.stringify({
         title: bookData.title,
+        author: bookData.author,
         online_price: bookData.online_price,
+        image_url: bookData.image_url,
       }),
     })
       .then(response => {
@@ -54,6 +51,7 @@ const Detail = () => {
       })
       .catch(error => console.log(error));
   };
+
   if (Object.keys(bookData).length === 0) return 'loading...';
 
   const IntroductionList = [
@@ -76,16 +74,13 @@ const Detail = () => {
             />
           </ThumbNailWrap>
           <HeaderInfoWrap>
-            <Category>
-              {bookData.main_category} &gt; {bookData.sub_category}
-            </Category>
-
+            <Category>프로그래밍 언어 &gt; JavaScript</Category>
             <BookTitle>{bookData.title}</BookTitle>
 
             <FaStar size={12} style={{ color: '#dc3232' }} />
-            <StarRating>{bookData.reviews_section.rating}점</StarRating>
+            <StarRating>{bookData.reviews_section?.rating}점</StarRating>
             <NumOfReviews>
-              ({bookData.reviews_section.num_reviews}명)
+              ({bookData.reviews_section?.num_reviews}명)
             </NumOfReviews>
 
             <BookInfoWrapper>
@@ -98,7 +93,6 @@ const Detail = () => {
               <Text> 출판</Text>
             </BookInfoWrapper>
 
-            {/* price table */}
             <TableWrap>
               <PriceTable>
                 <tr>
@@ -121,7 +115,7 @@ const Detail = () => {
               <ImageButton>
                 <FaCartPlus size="17" color="#808991" />
               </ImageButton>
-              <TextButton onClick={addToCart}>소장하기</TextButton>
+              <TextButton onClick={goToOrder}>소장하기</TextButton>
             </ButtonWrap>
           </HeaderInfoWrap>
         </DetailHeader>

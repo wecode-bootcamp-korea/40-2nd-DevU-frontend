@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { CATEGORY_MENU } from './CATEGORY_MENU';
 
 const CategoryMenu = () => {
   return (
@@ -8,7 +9,7 @@ const CategoryMenu = () => {
       {CATEGORY_MENU.map(menu => {
         return (
           <ButtonWrapper key={menu.id}>
-            <CategoryButton to="">
+            <CategoryButton to={`/list/${menu.id}`}>
               <CategoryIcon src={menu.imageSrc} />
             </CategoryButton>
             <CategoryTitle>{menu.title}</CategoryTitle>
@@ -38,6 +39,11 @@ const CategoryButton = styled(Link)`
   width: 65px;
   height: 65px;
   border-radius: 70%;
+  :hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+    border: 3px solid #1e9eff;
+  }
 `;
 
 const CategoryIcon = styled.img`
@@ -50,11 +56,3 @@ const CategoryTitle = styled.div`
 `;
 
 export default CategoryMenu;
-
-const CATEGORY_MENU = [
-  { id: 1, title: '컴퓨터 공학', imageSrc: '/images/computer.png' },
-  { id: 2, title: '프로그래밍 언어', imageSrc: '/images/programming.png' },
-  { id: 3, title: '데이터베이스', imageSrc: '/images/database.png' },
-  { id: 4, title: '네트워크', imageSrc: '/images/network.png' },
-  { id: 5, title: '교육', imageSrc: '/images/education.png' },
-];

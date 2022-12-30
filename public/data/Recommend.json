@@ -1,0 +1,53 @@
+[
+  {
+    "title": "C언어 1주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/608/6084d61c1422223f66c68c68a41aeda1.jpg",
+    "author": "황정수"
+  },
+  {
+    "title": "C언어 2주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/f64/f64514358a470656f9656ec0f7d286ae.jpg",
+    "author": "박진주"
+  },
+
+  {
+    "title": "C언어 3주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/d87/d87b720ae544742b0378e197c843dc85.jpg",
+    "author": "윤선영"
+  },
+  {
+    "title": "C언어 4주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/298/29832a3743491bf8a70ddbaace686bf5.jpg",
+    "author": "배효빈"
+  },
+  {
+    "title": "C언어 5주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/0c9/0c9b295e87a46f0ab1dc62056f90dadd.jpg",
+    "author": "임우진"
+  },
+  {
+    "title": "자바 1주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/d87/d87b720ae544742b0378e197c843dc85.jpg",
+    "author": "황정수"
+  },
+  {
+    "title": "자바 2주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/298/29832a3743491bf8a70ddbaace686bf5.jpg",
+    "author": "박진주"
+  },
+  {
+    "title": "자바 3주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/0c9/0c9b295e87a46f0ab1dc62056f90dadd.jpg",
+    "author": "윤선영"
+  },
+  {
+    "title": "자바 4주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/265/2659aac2cb5244e6aeb4b203b9354d4b.jpg",
+    "author": "배효빈"
+  },
+  {
+    "title": "자바 5주 안에 끝내기",
+    "image": "https://cdn.asaha.com/assets/thumbs/182/182864176b1a134cb4a635d4fe9e3904.jpg",
+    "author": "임우진"
+  }
+]

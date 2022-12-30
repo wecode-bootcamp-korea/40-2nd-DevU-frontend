@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const TopButton = () => {
-  const [showButton, setShowButton] = useState(false);
+  const [isShowButton, setIsShowButton] = useState(false);
 
   const scrollToTop = () => {
     window.scroll({
@@ -13,9 +13,9 @@ const TopButton = () => {
   useEffect(() => {
     const handleShowButton = () => {
       if (window.scrollY > 200) {
-        setShowButton(true);
+        setIsShowButton(true);
       } else {
-        setShowButton(false);
+        setIsShowButton(false);
       }
     };
     window.addEventListener('scroll', handleShowButton);
@@ -25,7 +25,7 @@ const TopButton = () => {
   }, []);
 
   return (
-    showButton && (
+    isShowButton && (
       <ArrowUpButton onClick={scrollToTop} type="button">
         <img src="/images/arrow-up.png" alt="arrow-up" />
       </ArrowUpButton>
@@ -47,4 +47,9 @@ const ArrowUpButton = styled.button`
   width: 58px;
   height: 58px;
   bottom: 30px;
+  :hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+    background-color: #f5f5f5;
+  }
 `;
