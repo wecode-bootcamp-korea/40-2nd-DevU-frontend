@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaStar } from 'react-icons/fa';
 import { FaTrashAlt } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
+
+const INITIAL_REVIEW = {
+  review: '',
+  rating: 0,
+};
 
 const Review = ({ bookData, setBookData }) => {
+  const { id: bookId } = useParams();
   const stars = Array(5).fill(0);
   const [review, setReview] = useState([]);
   const [hoverRatingValue, setHoverRatingValue] = useState(undefined);
-  const [newReview, setNewReview] = useState({
-    book_id: 1,
-    review: '',
-    rating: 0,
-  });
+  const [newReview, setNewReview] = useState(INITIAL_REVIEW);
 
   const isValid = newReview.review.length >= 5 && newReview.rating >= 1;
 
@@ -30,36 +33,55 @@ const Review = ({ bookData, setBookData }) => {
   };
 
   const reqGetReviews = () => {
-    fetch('http://10.58.52.196:3000/review/get', { method: 'GET' })
+    fetch(`http://10.58.52.224:3000/review/get/${bookId}`, { method: 'GET' })
       .then(response => response.json())
       .then(result => setReview(result));
   };
 
   useEffect(() => {
     reqGetReviews();
-  }, []);
+  }, [bookId]);
 
-  const addReview = e => {
-    fetch('http://10.58.52.196:3000/review/add', {
+  const addReview = () => {
+    fetch(`http://10.58.52.224:3000/review/add`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        authorization: localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         review: newReview.review,
         rating: newReview.rating,
-        bookId: 1,
+        bookId: bookId,
+        created_at: newReview.created_at,
       }),
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Error');
-        }
-      })
-      .then(result => {
+    }).then(response => {
+      if (response.ok) {
         reqGetReviews();
-      })
-      .catch(error => console.log(error));
+        setNewReview(INITIAL_REVIEW);
+      } else {
+        alert('예상치 못한 오류가 발생했습니다. 다시 시도해주세요!');
+      }
+    });
+  };
+
+  const deleteReview = reviewId => {
+    fetch(`http://10.58.52.224:3000/review/delete/${bookId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: reviewId,
+      }),
+    }).then(response => {
+      if (response.ok) {
+        reqGetReviews();
+      } else {
+        alert('예상치 못한 오류가 발생했습니다. 다시 시도해주세요!');
+      }
+    });
   };
 
   const handleMouseOver = value => {
@@ -77,7 +99,7 @@ const Review = ({ bookData, setBookData }) => {
       </SectionTitleWrap>
       <ReviewTitle>이 책을 평가해주세요!</ReviewTitle>
       <StarRating>
-        {stars.map((star, index) => {
+        {stars.map((_, index) => {
           return (
             <FaStar
               key={index}
@@ -104,19 +126,19 @@ const Review = ({ bookData, setBookData }) => {
         placeholder="리뷰 작성 시 욕설, 비속어나 타인을 비방하는 문구를 사용하면 비공개될 수 있습니다."
       />
       <ReviewButtonWrap>
-        <TextButton onClick={addReview} fontSize="12px" invalid={!isValid}>
+        <TextButton onClick={addReview} fontSize="12px" disabled={!isValid}>
           리뷰 남기기
         </TextButton>
       </ReviewButtonWrap>
-
-      <>
-        <TabList>
-          <Option>구매자 리뷰</Option>
-          <Option>최신순</Option>
-        </TabList>
-        {review.map((review, index) => {
+      <TabList>
+        <Option>구매자 리뷰</Option>
+        <Option>최신순</Option>
+      </TabList>
+      <ReviewWrap>
+        {review.map(review => {
           return (
-            <ReviewBox key={index}>
+            <ReviewBox key={review.id}>
+              <div>{review.id}</div>
               <ReviewerInfo>
                 <FiveStars>
                   {stars.map((star, index) => {
@@ -135,14 +157,20 @@ const Review = ({ bookData, setBookData }) => {
               </ReviewerInfo>
               <ReviewContentWrap>
                 <Content>{review.review}</Content>
-                <DeleteButton>
+                <DeleteButton
+                  onClick={() => {
+                    if (window.confirm('리뷰를 삭제하시겠습니까?')) {
+                      deleteReview(review.id);
+                    }
+                  }}
+                >
                   <FaTrashAlt color="gray" cursor="pointer" />
                 </DeleteButton>
               </ReviewContentWrap>
             </ReviewBox>
           );
         })}
-      </>
+      </ReviewWrap>
     </SectionWrap>
   );
 };
@@ -235,6 +263,11 @@ const Option = styled.span`
   color: #808991;
 `;
 
+const ReviewWrap = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+`;
+
 const ReviewBox = styled.li`
   padding: 14px;
   display: flex;
@@ -250,7 +283,10 @@ const TextButton = styled.button`
   padding: 7px 16px;
   border-radius: 3px;
   cursor: pointer;
-  opacity: ${props => (props.invalid ? '0.5' : '1')};
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `;
 
 const StarRating = styled.div`

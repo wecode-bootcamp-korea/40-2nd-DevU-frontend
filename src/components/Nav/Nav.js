@@ -39,7 +39,7 @@ const Nav = () => {
       </UserMenuSection>
       <Navigator>
         <Title>
-          <LinkTag>
+          <LinkTag to="/">
             <DevUBlueTitle>DEVU</DevUBlueTitle>
             <DevUBlackTitle>BOOKS</DevUBlackTitle>
           </LinkTag>
@@ -118,6 +118,7 @@ const DevUBlackTitle = styled(DevUBlueTitle)`
 `;
 const SearchLabel = styled.label`
   ${({ theme }) => theme.variables.flex(null, 'flex-start')}
+  position: relative;
   width: auto;
   height: 40px;
   padding: 0 11px;

@@ -3,7 +3,7 @@
     "id": "11111",
     "image_url": "https://img.ridicdn.net/cover/754036246/xxlarge#1",
     "title": "트렌드 코리아2023",
-    "sellingPrice": 11070,
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -13,8 +13,8 @@
   {
     "id": "11112",
     "image_url": "https://img.ridicdn.net/cover/1691000117/xxlarge#1",
-    "title": "파친코",
-    "sellingPrice": 12500,
+    "bookTitle": "파친코",
+    "online_price": 12500,
     "reviewSection": {
       "rating": 4.8,
       "numberOfReview": 91
@@ -24,8 +24,8 @@
   {
     "id": "11113",
     "image_url": "https://img.ridicdn.net/cover/111036509/xxlarge#1",
-    "title": "하얀 늑대들",
-    "sellingPrice": 51600,
+    "bookTitle": "하얀 늑대들",
+    "online_price": 51600,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -35,8 +35,8 @@
   {
     "id": "11114",
     "image_url": "https://img.ridicdn.net/cover/754036090/xxlarge#1",
-    "title": "아버지의 해방일지",
-    "sellingPrice": 11070,
+    "bookTitle": "아버지의 해방일지",
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.3,
       "numberOfReview": 305
@@ -46,8 +46,8 @@
   {
     "id": "11115",
     "image_url": "https://img.ridicdn.net/cover/2177000101/xxlarge#1",
-    "title": "불편한 편의점",
-    "sellingPrice": 14000,
+    "bookTitle": "불편한 편의점",
+    "online_price": 14000,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 3640
@@ -57,8 +57,8 @@
   {
     "id": "11116",
     "image_url": "https://img.ridicdn.net/cover/754036246/xxlarge#1",
-    "title": "트렌드 코리아2023 202320 20323 203203 203",
-    "sellingPrice": 11070,
+    "bookTitle": "트렌드 코리아2023",
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -68,8 +68,8 @@
   {
     "id": "11117",
     "image_url": "https://img.ridicdn.net/cover/1691000117/xxlarge#1",
-    "title": "파친코",
-    "sellingPrice": 12500,
+    "bookTitle": "파친코",
+    "online_price": 12500,
     "reviewSection": {
       "rating": 4.8,
       "numberOfReview": 91
@@ -79,8 +79,8 @@
   {
     "id": "11118",
     "image_url": "https://img.ridicdn.net/cover/111036509/xxlarge#1",
-    "title": "하얀 늑대들",
-    "sellingPrice": 51600,
+    "bookTitle": "하얀 늑대들",
+    "online_price": 51600,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -90,8 +90,8 @@
   {
     "id": "11119",
     "image_url": "https://img.ridicdn.net/cover/754036090/xxlarge#1",
-    "title": "아버지의 해방일지",
-    "sellingPrice": 11070,
+    "bookTitle": "아버지의 해방일지",
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.3,
       "numberOfReview": 305
@@ -101,8 +101,8 @@
   {
     "id": "11120",
     "image_url": "https://img.ridicdn.net/cover/2177000101/xxlarge#1",
-    "title": "불편한 편의점",
-    "sellingPrice": 14000,
+    "bookTitle": "불편한 편의점",
+    "online_price": 14000,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 3640
@@ -112,8 +112,8 @@
   {
     "id": "11121",
     "image_url": "https://img.ridicdn.net/cover/754036246/xxlarge#1",
-    "title": "트렌드 코리아2023",
-    "sellingPrice": 11070,
+    "bookTitle": "트렌드 코리아2023",
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -123,8 +123,8 @@
   {
     "id": "11122",
     "image_url": "https://img.ridicdn.net/cover/1691000117/xxlarge#1",
-    "title": "파친코",
-    "sellingPrice": 12500,
+    "bookTitle": "파친코",
+    "online_price": 12500,
     "reviewSection": {
       "rating": 4.8,
       "numberOfReview": 91
@@ -134,8 +134,8 @@
   {
     "id": "11123",
     "image_url": "https://img.ridicdn.net/cover/111036509/xxlarge#1",
-    "title": "하얀 늑대들",
-    "sellingPrice": 51600,
+    "bookTitle": "하얀 늑대들",
+    "online_price": 51600,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -145,8 +145,8 @@
   {
     "id": "11124",
     "image_url": "https://img.ridicdn.net/cover/754036090/xxlarge#1",
-    "title": "아버지의 해방일지",
-    "sellingPrice": 11070,
+    "bookTitle": "아버지의 해방일지",
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.3,
       "numberOfReview": 305
@@ -156,8 +156,8 @@
   {
     "id": "11125",
     "image_url": "https://img.ridicdn.net/cover/2177000101/xxlarge#1",
-    "title": "불편한 편의점",
-    "sellingPrice": 14000,
+    "bookTitle": "불편한 편의점",
+    "online_price": 14000,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 3640
@@ -167,8 +167,8 @@
   {
     "id": "11126",
     "image_url": "https://img.ridicdn.net/cover/754036246/xxlarge#1",
-    "title": "트렌드 코리아2023",
-    "sellingPrice": 11070,
+    "bookTitle": "트렌드 코리아2023",
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -178,8 +178,8 @@
   {
     "id": "11127",
     "image_url": "https://img.ridicdn.net/cover/1691000117/xxlarge#1",
-    "title": "파친코",
-    "sellingPrice": 12500,
+    "bookTitle": "파친코",
+    "online_price": 12500,
     "reviewSection": {
       "rating": 4.8,
       "numberOfReview": 91
@@ -189,8 +189,8 @@
   {
     "id": "11128",
     "image_url": "https://img.ridicdn.net/cover/111036509/xxlarge#1",
-    "title": "하얀 늑대들",
-    "sellingPrice": 51600,
+    "bookTitle": "하얀 늑대들",
+    "online_price": 51600,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 77
@@ -200,8 +200,8 @@
   {
     "id": "11129",
     "image_url": "https://img.ridicdn.net/cover/754036090/xxlarge#1",
-    "title": "아버지의 해방일지",
-    "sellingPrice": 11070,
+    "bookTitle": "아버지의 해방일지",
+    "online_price": 11070,
     "reviewSection": {
       "rating": 4.3,
       "numberOfReview": 305
@@ -211,8 +211,8 @@
   {
     "id": "11130",
     "image_url": "https://img.ridicdn.net/cover/2177000101/xxlarge#1",
-    "title": "불편한 편의점",
-    "sellingPrice": 14000,
+    "bookTitle": "불편한 편의점",
+    "online_price": 14000,
     "reviewSection": {
       "rating": 4.7,
       "numberOfReview": 3640

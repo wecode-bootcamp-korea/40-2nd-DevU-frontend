@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const Recommend = ({ bookData, setBookData }) => {
-  // * TODO :  `books/${bookData.sub_category}?count=10` --> 동일한 sub category에서 book data 10개
+const Recommend = () => {
+  const [recommendBookData, setRecommendBookData] = useState([]);
   useEffect(() => {
-    fetch('/data/DetailData.json', { method: 'GET' })
+    fetch('/data/Recommend.json', { method: 'GET' })
       .then(response => response.json())
       .then(result => {
-        setBookData(result);
+        setRecommendBookData(result);
       });
   }, []);
 
@@ -18,14 +18,14 @@ const Recommend = ({ bookData, setBookData }) => {
       </SectionTitleWrap>
       <BookListWrap>
         <RecommendBookList>
-          {bookData.recommendBooks.map((data, index) => {
+          {recommendBookData.map((bookData, index) => {
             return (
               <BookInfoWrap key={index}>
                 <ImageWrap>
-                  <Image src={data.image} alt={data.title} />
+                  <Image src={bookData.image} alt={bookData.title} />
                 </ImageWrap>
-                <BookInfo fontWeight="700">{data.title}</BookInfo>
-                <BookInfo> {data.author}</BookInfo>
+                <BookInfo fontWeight="700">{bookData.title}</BookInfo>
+                <BookInfo> {bookData.author}</BookInfo>
               </BookInfoWrap>
             );
           })}
