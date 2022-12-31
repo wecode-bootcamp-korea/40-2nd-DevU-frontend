@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,13 +17,21 @@ const BUTTON_LIST = [
   { id: 2, icon: faAddressBook },
   { id: 3, icon: faUser },
 ];
-
 const Nav = () => {
+  const [isUser, setIsUser] = useState(false);
+
+  useEffect(() => {
+    localStorage.getItem('token') ? setIsUser(true) : setIsUser(false);
+  }, []);
+
   return (
     <NavSection>
       <UserMenuSection>
-        <UserMenuButton>로그인</UserMenuButton>
-        <UserMenuButton>캐시충전</UserMenuButton>
+        {isUser ? (
+          <UserMenuButton>캐시충전</UserMenuButton>
+        ) : (
+          <UserMenuButton to="/login">로그인</UserMenuButton>
+        )}
       </UserMenuSection>
       <Navigator>
         <Title>

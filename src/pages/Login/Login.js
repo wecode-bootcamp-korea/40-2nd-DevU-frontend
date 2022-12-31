@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import kakaoLogin from '../../assets/images/kakaoLogin.png';
 
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&response_type=code`;
+
 const Login = () => {
   return (
     <LoginPage>
@@ -12,7 +14,7 @@ const Login = () => {
         </Title>
       </LoginHeader>
       <LoginSection>
-        <LoginForm>
+        <LoginForm href={KAKAO_AUTH_URL}>
           <KakaoLoginButton type="button" />
         </LoginForm>
       </LoginSection>
@@ -50,7 +52,7 @@ const LoginSection = styled.section`
   padding: 60px 0 70px;
 `;
 
-const LoginForm = styled.div`
+const LoginForm = styled.a`
   ${({ theme }) => theme.variables.flex('column')}
   padding: 24px 10px;
 `;
