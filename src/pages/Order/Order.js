@@ -1,34 +1,91 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { loadTossPayments } from '@tosspayments/payment-sdk';
+import MethodDropDown from '../../components/Order/MethodDropDown';
+
+const clientKey = process.env.REACT_APP_CLIENT_KEY;
+const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
 
 const Order = () => {
-  const [orderItems, setOrderItems] = useState([]);
-  const itemPrice = orderItems[0]?.price.toLocaleString('ko-KR');
-  const userBalance = 1000000;
-  const orderBalance = (userBalance - orderItems[0]?.price).toLocaleString(
-    'ko-KR'
-  );
+  const [orderMethod, setOrderMethod] = useState('');
+  const [orderItems, setOrderItems] = useState({
+    id: 0,
+    image_url: '',
+    title: '',
+    author: '',
+    online_price: 0,
+    point: 0,
+  });
+
+  const { bookId } = useParams();
+
+  const moveToBookshelf = useNavigate('/bookshelf');
+
+  const { id, image_url, title, author, online_price, point } = orderItems;
+
+  const itemPrice = online_price.toLocaleString('ko-KR');
+  const orderBalance = (point - online_price).toLocaleString('ko-KR');
 
   useEffect(() => {
-    fetch('/data/OrderItem.json', {
+    fetch(`http://10.58.52.153:3000/orders/${bookId}`, {
       method: 'GET',
     })
       .then(res => res.json())
-      .then(setOrderItems);
-  }, []);
+      .then(data => {
+        setOrderItems(data[0]);
+      });
+  }, [bookId]);
+
+  const orderWithPoints = () => {
+    fetch('http://10.58.52.153:3000/orders', {
+      method: 'POST',
+      headers: {
+        Accept: 'application / json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({
+        bookId: { id },
+        online_price: { online_price },
+      }),
+    })
+      .then(response => {
+        if (response.ok === true) {
+          return response.json();
+        }
+        throw new Error('통신실패');
+      })
+      .then(data => {
+        moveToBookshelf();
+      })
+
+      .catch(error => console.log(error));
+  };
+
+  const orderWithToss = () => {
+    loadTossPayments(clientKey).then(tossPayments => {
+      tossPayments.requestPayment('카드', {
+        amount: `${online_price}`,
+        orderId: 'Abcd123_123',
+        orderName: `${title}`,
+        successUrl: `${redirectUrl}`,
+        failUrl: `${redirectUrl}`,
+      });
+    });
+  };
 
   return (
     <OrderMain>
       <OrderItemContainer>
         <OrderTitle>주문 도서</OrderTitle>
-        <OrderItemBox key={orderItems[0]?.id}>
+        <OrderItemBox key={id}>
           <OrderItemInfoBox>
             <OrderItemImageBox>
-              <OrderItemImage src={orderItems[0]?.imageUrl} />
+              <OrderItemImage src={image_url} />
             </OrderItemImageBox>
             <OrderItemTextBox>
-              <OrderItemTitle>{orderItems[0]?.title}</OrderItemTitle>
-              <OrderItemAuthor>{orderItems[0]?.author}</OrderItemAuthor>
+              <OrderItemTitle>{title}</OrderItemTitle>
+              <OrderItemAuthor>{author}</OrderItemAuthor>
             </OrderItemTextBox>
           </OrderItemInfoBox>
           <OrderItemPrice />
@@ -42,16 +99,32 @@ const Order = () => {
         </PriceBox>
         <MethodTitle>결제 수단</MethodTitle>
         <OrderMethodBox>
-          <OrderMethod>보유 캐시</OrderMethod>
-          <OrderMethodBalance>
-            {userBalance.toLocaleString('ko-KR')}원
-          </OrderMethodBalance>
+          {ORDER_METHOD.map(({ id, method }) => {
+            return (
+              <OrderMethodLabel key={id}>
+                <SelectMethod
+                  type="radio"
+                  value={method}
+                  name="method"
+                  onChange={e => {
+                    setOrderMethod(e.target.value);
+                  }}
+                />
+                {method}
+              </OrderMethodLabel>
+            );
+          })}
         </OrderMethodBox>
-        <BalanceTitle>결제 후 잔액</BalanceTitle>
-        <OrderBalanceBox>
-          <AfterOrderBalance>{orderBalance}원</AfterOrderBalance>
-        </OrderBalanceBox>
-        <OrderButton>결제하기</OrderButton>
+        {orderMethod === '보유 포인트' && (
+          <MethodDropDown userBalance={point} orderBalance={orderBalance} />
+        )}
+        <OrderButton
+          onClick={
+            orderMethod === '보유 포인트' ? orderWithPoints : orderWithToss
+          }
+        >
+          결제하기
+        </OrderButton>
       </OrderInfoContainer>
     </OrderMain>
   );
@@ -164,7 +237,7 @@ const MethodTitle = styled.h1`
 `;
 
 const OrderMethodBox = styled.div`
-  ${props => props.theme.variables.flex('row', 'space-between', 'center')}
+  ${props => props.theme.variables.flex('column', 'flex-start', 'flex-start')}
   width: 270px;
   border-top: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
@@ -172,33 +245,14 @@ const OrderMethodBox = styled.div`
   margin-bottom: 40px;
 `;
 
-const OrderMethod = styled.div`
+const OrderMethodLabel = styled.label`
+  ${props => props.theme.variables.flex('row', 'center', 'center')}
+  margin: 10px 0;
   font-size: 15px;
 `;
-
-const OrderMethodBalance = styled.div`
-  font-size: 30px;
+const SelectMethod = styled.input`
+  margin-right: 10px;
 `;
-
-const BalanceTitle = styled.h1`
-  margin-bottom: 20px;
-  font-weight: 700;
-`;
-
-const OrderBalanceBox = styled.div`
-  ${props => props.theme.variables.flex('row', 'center', 'center')}
-  width: 270px;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
-  padding: 20px 0;
-  margin-bottom: 40px;
-`;
-
-const AfterOrderBalance = styled.div`
-  font-size: 30px;
-  color: #1e9eff;
-`;
-
 const OrderButton = styled.button`
   width: 270px;
   height: 45px;
@@ -211,3 +265,8 @@ const OrderButton = styled.button`
 `;
 
 export default Order;
+
+const ORDER_METHOD = [
+  { id: 1, method: '보유 포인트' },
+  { id: 2, method: '토스 페이먼츠' },
+];
