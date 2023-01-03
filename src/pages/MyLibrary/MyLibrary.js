@@ -6,16 +6,17 @@ const MyLibrary = () => {
   const [myBookLibrary, setMyBookLibrary] = useState([]);
 
   useEffect(() => {
-    fetch('/data/bookLibrary.json', {
+    fetch('http://10.58.52.118:3000/bookshelf/1', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then(res => res.json())
-      .then(setMyBookLibrary);
+      .then(data => {
+        setMyBookLibrary(data.data);
+      });
   }, []);
-
   return (
     <>
       <UpperWrapper>
@@ -25,10 +26,10 @@ const MyLibrary = () => {
       </UpperWrapper>
       <MainWrapper>
         <MyBookWrapper>
-          {myBookLibrary.map(({ id, imageUrl, title }) => (
-            <ReadButton key={id} to="MyBook">
+          {myBookLibrary.map(({ id, image_url, title, book_id }) => (
+            <ReadButton key={id} to={`/viewer/${book_id}`}>
               <ImageWrapper>
-                <LibraryImage src={imageUrl} alt={title} />
+                <LibraryImage src={image_url} alt={title} />
               </ImageWrapper>
             </ReadButton>
           ))}
@@ -36,8 +37,8 @@ const MyLibrary = () => {
         <LibraryFooter>
           <FooterTitle>© Devu Corp.</FooterTitle>
           <FooterWrapper>
-            {LIBRARY_FOOTER.map(item => (
-              <FooterItem key={item.id}>{item.item}</FooterItem>
+            {LIBRARY_FOOTER.map(({ id, item }) => (
+              <FooterItem key={id}>{item}</FooterItem>
             ))}
           </FooterWrapper>
         </LibraryFooter>

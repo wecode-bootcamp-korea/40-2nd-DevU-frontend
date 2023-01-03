@@ -21,8 +21,8 @@ const Router = () => {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/order" element={<Order />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/mylibrary" element={<MyLibrary />} />
-        <Route path="/viewer" element={<Viewer />} />
+        <Route path="/bookshelf/1" element={<MyLibrary />} />
+        <Route path="/viewer/:bookId" element={<Viewer />} />
         <Route path="/categorymenu" element={<CategoryMenu />} />
       </Routes>
       <Footer />

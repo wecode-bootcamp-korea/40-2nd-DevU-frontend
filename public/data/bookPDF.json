@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "타입스크립트 넌 내 타입",
+    "list": [
+      { "title": "1. typescript란" },
+      { "title": "2. typescript 설치하기" },
+      { "title": "3. 자바스크립트가 가지지 못한 녀석, 타입" },
+      { "title": "4. 배열과 튜플" },
+      { "title": "5. 함수와 클래스" },
+      { "title": "6. 객체의 타입을 정하자, 인터페이스" },
+      { "title": "7. 유연하게 타입을 지정하려면 제네릭!" },
+      { "title": "8. 타입스크립트로의 이주, 마이그레이션" }
+    ],
+    "contents": "../../../src/components/PDF/Advances_in_Computer_Science.pdf"
+  }
+]
