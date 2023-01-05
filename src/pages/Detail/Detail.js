@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Review from './Component/Review';
 import { FaStar } from 'react-icons/fa';
@@ -7,37 +7,38 @@ import { FaHeart } from 'react-icons/fa';
 import { FaCartPlus } from 'react-icons/fa';
 import Recommend from './Component/Recommend';
 import Introduction from './Component/Introduction';
+import { API } from '../../config';
 
 const Detail = () => {
   const [bookData, setBookData] = useState({});
+  const [review, setReview] = useState([]);
   const params = useParams();
   const bookId = params.id;
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getData();
+    getReview();
   }, []);
 
   const getData = () => {
-    fetch(`http://10.58.52.196:3000/books/details/${bookId}`, { method: 'GET' })
+    fetch(`${API.detail}/${bookId}`, { method: 'GET' })
       .then(response => response.json())
       .then(result => setBookData(result[0]));
+  };
+
+  const getReview = () => {
+    fetch(`${API.review}/${bookId}`, { method: 'GET' })
+      .then(res => res.json())
+      .then(result => setReview(result[0]));
   };
 
   const token = localStorage.getItem('token');
 
   const goToOrder = () => {
-    fetch('http://10.58.52.204:8000/cart/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        title: bookData.title,
-        author: bookData.author,
-        online_price: bookData.online_price,
-        image_url: bookData.image_url,
-      }),
+    fetch(`${API.order}/${bookId}`, {
+      method: 'GET',
     })
       .then(response => {
         if (response.ok) {
@@ -47,9 +48,9 @@ const Detail = () => {
         }
       })
       .then(data => {
-        alert('선택하신 상품이 성공적으로 담겼습니다');
-      })
-      .catch(error => console.log(error));
+        navigate(`/orders/${bookId}`);
+      });
+    // .catch(error => console.log(error));
   };
 
   if (Object.keys(bookData).length === 0) return 'loading...';
@@ -62,6 +63,11 @@ const Detail = () => {
       content: bookData.list,
     },
   ];
+
+  const roundAVG = Math.round(review.AVG * 100) / 100;
+
+  const offlinePrice = Number(bookData.offline_price).toLocaleString('ko-KR');
+  const itemPrice = Number(bookData.online_price).toLocaleString('ko-KR');
 
   return (
     <DetailWrap>
@@ -78,10 +84,8 @@ const Detail = () => {
             <BookTitle>{bookData.title}</BookTitle>
 
             <FaStar size={12} style={{ color: '#dc3232' }} />
-            <StarRating>{bookData.reviews_section?.rating}점</StarRating>
-            <NumOfReviews>
-              ({bookData.reviews_section?.num_reviews}명)
-            </NumOfReviews>
+            <StarRating>{roundAVG}점</StarRating>
+            <NumOfReviews>({review.COUNT}명)</NumOfReviews>
 
             <BookInfoWrapper>
               <BookInfo>{bookData.author}</BookInfo>
@@ -98,13 +102,11 @@ const Detail = () => {
                 <tr>
                   <PriceTitle rowSpan={2}> 소장 </PriceTitle>
                   <PriceType>전자책 가격</PriceType>
-                  <Price>{bookData.offline_price.toLocaleString()}원</Price>
+                  <Price>{offlinePrice}원</Price>
                 </tr>
                 <tr>
                   <PriceType>판매가</PriceType>
-                  <Price color="#1f8ce6">
-                    {bookData.online_price.toLocaleString()}원
-                  </Price>
+                  <Price color="#1f8ce6">{itemPrice}원</Price>
                 </tr>
               </PriceTable>
             </TableWrap>
@@ -126,7 +128,7 @@ const Detail = () => {
       ))}
 
       {/* 리뷰 */}
-      <Review bookData={bookData} setBookData={setBookData} />
+      <Review />
 
       {/* 추천도서 */}
       <Recommend bookData={bookData} />

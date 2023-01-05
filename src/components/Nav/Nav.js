@@ -11,15 +11,20 @@ import {
   faAddressBook,
   faUser,
 } from '@fortawesome/free-regular-svg-icons';
+import Search from '../SearchModal.js/Search';
+import { API } from '../../config';
 
 const BUTTON_LIST = [
   { id: 1, icon: faBell },
-  { id: 2, icon: faAddressBook },
+  { id: 2, icon: faAddressBook, path: '/mylibrary' },
   { id: 3, icon: faUser },
 ];
 
 const Nav = () => {
   const [isUser, setIsUser] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [list, setList] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -27,6 +32,28 @@ const Nav = () => {
       setIsUser(isLogin);
     }, 500);
   }, []);
+
+  const showModal = () => {
+    setModalOpen(true);
+  };
+
+  const inputHandler = e => {
+    setSearchValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (searchValue.length === 0) {
+      setList([]);
+      return;
+    }
+    fetch(`${API.search}${searchValue}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => {
+        setList(result);
+      });
+  }, [searchValue]);
 
   return (
     <NavSection>
@@ -46,14 +73,19 @@ const Nav = () => {
         </Title>
         <SearchLabel>
           <MagnifyIcon icon={faMagnifyingGlass} />
-          <SearchInput />
+          <SearchInput
+            value={searchValue}
+            onFocus={showModal}
+            onChange={inputHandler}
+          />
           <DeleteButton>
+            {modalOpen && <Search list={list} setModalOpen={setModalOpen} />}
             <DeleteIcon icon={faCircleXmark} />
           </DeleteButton>
         </SearchLabel>
         <ButtonsSection>
           {BUTTON_LIST.map(button => (
-            <ButtonsWrap key={button.id}>
+            <ButtonsWrap key={button.id} to={button.path}>
               <ButtonsIcon icon={button.icon} />
             </ButtonsWrap>
           ))}

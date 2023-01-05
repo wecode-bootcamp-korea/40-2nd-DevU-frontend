@@ -7,9 +7,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { API } from '../../../config';
 
 const ListCarousel = () => {
-  const info = useFetch('/data/ListData.json');
+  const info = useFetch(`${API.subCategory}/7`);
 
   const settings = {
     dots: false,
@@ -32,11 +33,11 @@ const ListCarousel = () => {
               <BookInfoSection>
                 <BookTitle>{book.title}</BookTitle>
                 <AuthorName>{book.author}</AuthorName>
-                <RatingScore>
+                {/* <RatingScore>
                   <StarIcon icon={faStar} />
                   <ScoreText>{book.reviewSection.rating}</ScoreText> (
                   {book.reviewSection.numberOfReview})
-                </RatingScore>
+                </RatingScore> */}
               </BookInfoSection>
             </ListViewSection>
           </ColumnSection>

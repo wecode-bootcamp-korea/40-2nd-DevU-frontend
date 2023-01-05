@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { API } from '../../config';
 
 const MyLibrary = () => {
   const [myBookLibrary, setMyBookLibrary] = useState([]);
 
   useEffect(() => {
-    fetch('http://10.58.52.118:3000/bookshelf/1', {
+    fetch(`${API.myLibrary}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     })
       .then(res => res.json())
       .then(data => {

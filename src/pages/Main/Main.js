@@ -15,11 +15,11 @@ const Main = () => {
         <MainCarousel />
         <CategoryMenu />
         <CarouselSection>
-          <CarouselTitle>베스트 작품</CarouselTitle>
+          <CarouselTitle>베스트 서적</CarouselTitle>
           <SlideCarousel />
         </CarouselSection>
         <CarouselSection>
-          <CarouselTitle>새로 나온 작품</CarouselTitle>
+          <CarouselTitle>새로 나온 서적</CarouselTitle>
           <ListCarousel />
         </CarouselSection>
       </MainSection>

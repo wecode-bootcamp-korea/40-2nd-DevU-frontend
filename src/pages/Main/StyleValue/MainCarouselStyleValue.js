@@ -6,8 +6,8 @@ const styleValue = {
   totalViewRate: `20`,
   smallViewRate: `1`,
   largeViewRate: `18`,
-  animationDuration: `700`,
-  intervalDuration: `4000`,
+  animationDuration: `500`,
+  intervalDuration: `2000`,
 };
 
 export default styleValue;
