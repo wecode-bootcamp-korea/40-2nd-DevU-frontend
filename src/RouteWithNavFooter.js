@@ -7,22 +7,20 @@ import List from './pages/List/List';
 import Main from './pages/Main/Main';
 import MyLibrary from './pages/MyLibrary/MyLibrary';
 import Order from './pages/Order/Order';
-import Viewer from './pages/Viewer/Viewer';
 import Footer from './components/Footer/Footer';
 import Auth from './pages/Login/Auth';
 
-const RoutWithoutNavFooter = () => {
+const RouteWithNavFooter = () => {
   return (
     <>
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/:id" element={<List />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/books/details/:id" element={<Detail />} />
+        <Route path="/orders/:id" element={<Order />} />
         <Route path="/users/kakao/signin" element={<Auth />} />
         <Route path="/mylibrary" element={<MyLibrary />} />
-        <Route path="/viewer" element={<Viewer />} />
         <Route path="/categorymenu" element={<CategoryMenu />} />
       </Routes>
       <Footer />
@@ -30,4 +28,4 @@ const RoutWithoutNavFooter = () => {
   );
 };
 
-export default RoutWithoutNavFooter;
+export default RouteWithNavFooter;

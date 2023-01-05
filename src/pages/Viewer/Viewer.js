@@ -6,8 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { API } from '../../config';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+const LIST =
+  '1.이 책에 대하여,2.책 소개,3.책 활용법,4.중요 코드 스킬,5.미션1 : 웹페이지 만들기,6.미션2 : 비밀번호 만들기,7.미션3 : 어플리케이션 만들기,8.미션4 : 라우트 설계하기,9.미션5 : 게임 만들기,10.미션6 : 완성된 웹사이트';
 
 const Viewer = () => {
   const [bookInfo, setBookInfo] = useState([]);
@@ -18,11 +22,13 @@ const Viewer = () => {
   const url =
     'https://devubucket.s3.ap-northeast-2.amazonaws.com/ridi-devu.pdf';
 
-  const { title, list, list_number, content_url } = bookInfo;
+  const { title, list_number, content_url } = bookInfo;
 
-  const { bookId } = useParams();
+  const params = useParams();
+  const bookId = params.id;
 
-  const index = (list || '').split(',');
+  const index = (LIST || '').split(',');
+
   const indexPageNumber = (list_number || '').split(',');
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -62,11 +68,9 @@ const Viewer = () => {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.153:3000/bookshelf/viewer/${bookId}`, {
+    fetch(`${API.viewer}/${bookId}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
     })
       .then(res => res.json())
       .then(data => {
@@ -78,7 +82,7 @@ const Viewer = () => {
     <ViewerBG>
       <ViewerMainContainer>
         <ViewerNav>
-          <PrevLink to="/bookshelf">
+          <PrevLink to="/mylibrary">
             <PrevIcon>
               <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
             </PrevIcon>
@@ -195,7 +199,7 @@ const ZoomInButton = styled.button`
   border-left: 0px;
   width: 40px;
   height: 30px;
-  font-size: 15px;
+  font-size: 13px;
   color: grey;
   background-color: white;
   cursor: pointer;

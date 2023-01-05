@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import CategoryMenu from '../CategoryMenu/CategoryMenu';
 import { CATEGORY_MENU } from '../CategoryMenu/CATEGORY_MENU';
 import TopButton from './TopButton';
+import { API } from '../../config';
+import ListCell from './ListCell';
 
 const List = () => {
   const params = useParams();
@@ -28,12 +30,9 @@ const List = () => {
   useEffect(() => {
     if (!subCategoryId) return;
 
-    fetch(
-      `http://10.58.52.196:3000/books/subCategories/${subCategoryId}?count=20`,
-      {
-        method: 'GET',
-      }
-    )
+    fetch(`${API.subCategory}/${subCategoryId}?count=20`, {
+      method: 'GET',
+    })
       .then(response => {
         return response.json();
       })
@@ -68,27 +67,18 @@ const List = () => {
 
       <Container>
         <BookListContainer>
-          {listData.map(
-            ({ id, image_url, title, author, online_price, reviewSection }) => (
-              <MoveToDetail key={id} to={`/detail/${id}`}>
-                <BookContainer>
-                  <BookImage src={image_url} />
-                  <BookTitle>{title}</BookTitle>
-                  <AuthorName>{author}</AuthorName>
-                  <ReviewsSection>
-                    <img src="/images/star.png" alt="star" />
-                    <StarRank>{reviewSection.rating} </StarRank>
-                    <NumOfReviews>
-                      ({reviewSection.numberOfReview})
-                    </NumOfReviews>
-                  </ReviewsSection>
-                  <Price>
-                    소장 {Number(online_price).toLocaleString('ko-kR')}원
-                  </Price>
-                </BookContainer>
-              </MoveToDetail>
-            )
-          )}
+          {listData.map(({ id, image_url, title, author, online_price }) => {
+            return (
+              <ListCell
+                key={id}
+                id={id}
+                image_url={image_url}
+                title={title}
+                author={author}
+                online_price={online_price}
+              />
+            );
+          })}
           <TopButton />
         </BookListContainer>
       </Container>
@@ -116,55 +106,55 @@ const BookListContainer = styled.ul`
   min-width: 500px;
 `;
 
-const BookContainer = styled.li`
-  ${props => props.theme.variables.flex('column', 'center', 'flex-start')}
-  margin: 30px 5px;
-  height: 410p;
-  list-style-type: none;
-`;
+// const BookContainer = styled.li`
+//   ${props => props.theme.variables.flex('column', 'center', 'flex-start')}
+//   margin: 30px 5px;
+//   height: 410p;
+//   list-style-type: none;
+// `;
 
-const BookImage = styled.img`
-  border: 1px solid rgba(20, 20, 20, 0.06);
-  border-radius: 5px;
-  width: 170px;
-  height: 247px;
-`;
+// const BookImage = styled.img`
+//   border: 1px solid rgba(20, 20, 20, 0.06);
+//   border-radius: 5px;
+//   width: 170px;
+//   height: 247px;
+// `;
 
-const AuthorName = styled.span`
-  color: gray;
-  font-size: 13px;
-`;
+// const AuthorName = styled.span`
+//   color: gray;
+//   font-size: 13px;
+// `;
 
-const BookTitle = styled.span`
-  margin: 10px 0;
-  width: 170px;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-  color: #141414;
-`;
+// const BookTitle = styled.span`
+//   margin: 10px 0;
+//   width: 170px;
+//   font-size: 15px;
+//   letter-spacing: -0.01em;
+//   color: #141414;
+// `;
 
-const ReviewsSection = styled.div`
-  margin: 6px 0;
-`;
+// const ReviewsSection = styled.div`
+//   margin: 6px 0;
+// `;
 
-const StarRank = styled.span`
-  color: #dc3232;
-  font-size: 13px;
-  padding-left: 3px;
-`;
-const NumOfReviews = styled.span`
-  color: gray;
-  font-size: 13px;
-`;
+// const StarRank = styled.span`
+//   color: #dc3232;
+//   font-size: 13px;
+//   padding-left: 3px;
+// `;
+// const NumOfReviews = styled.span`
+//   color: gray;
+//   font-size: 13px;
+// `;
 
-const Price = styled.span`
-  font-size: 14px;
-  color: #1e9eff;
-`;
+// const Price = styled.span`
+//   font-size: 14px;
+//   color: #1e9eff;
+// `;
 
-const MoveToDetail = styled(Link)`
-  text-decoration: none;
-`;
+// const MoveToDetail = styled(Link)`
+//   text-decoration: none;
+// `;
 
 const SubCategoryWrap = styled.div`
   margin-top: 60px;

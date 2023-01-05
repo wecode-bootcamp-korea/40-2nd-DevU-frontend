@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { FaStar } from 'react-icons/fa';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import { API } from '../../../config';
 
 const INITIAL_REVIEW = {
   review: '',
   rating: 0,
 };
 
-const Review = ({ bookData, setBookData }) => {
+const Review = () => {
   const { id: bookId } = useParams();
   const stars = Array(5).fill(0);
   const [review, setReview] = useState([]);
@@ -33,9 +34,9 @@ const Review = ({ bookData, setBookData }) => {
   };
 
   const reqGetReviews = () => {
-    fetch(`http://10.58.52.224:3000/review/get/${bookId}`, { method: 'GET' })
+    fetch(`${API.review}/${bookId}`, { method: 'GET' })
       .then(response => response.json())
-      .then(result => setReview(result));
+      .then(result => setReview(result[0].Reviews));
   };
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const Review = ({ bookData, setBookData }) => {
   }, [bookId]);
 
   const addReview = () => {
-    fetch(`http://10.58.52.224:3000/review/add`, {
+    fetch(`${API.review}/`, {
       method: 'POST',
       headers: {
         authorization: localStorage.getItem('token'),
@@ -66,7 +67,7 @@ const Review = ({ bookData, setBookData }) => {
   };
 
   const deleteReview = reviewId => {
-    fetch(`http://10.58.52.224:3000/review/delete/${bookId}`, {
+    fetch(`${API.review}/${bookId}`, {
       method: 'DELETE',
       headers: {
         authorization: localStorage.getItem('token'),
@@ -138,7 +139,6 @@ const Review = ({ bookData, setBookData }) => {
         {review.map(review => {
           return (
             <ReviewBox key={review.id}>
-              <div>{review.id}</div>
               <ReviewerInfo>
                 <FiveStars>
                   {stars.map((star, index) => {
@@ -152,7 +152,7 @@ const Review = ({ bookData, setBookData }) => {
                   })}
                 </FiveStars>
 
-                <UserId>{review.user_id}</UserId>
+                <UserId>{review.id}</UserId>
                 <ReviewDate>{review.created_at}</ReviewDate>
               </ReviewerInfo>
               <ReviewContentWrap>

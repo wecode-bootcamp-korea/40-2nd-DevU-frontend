@@ -3,12 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import MethodDropDown from '../../components/Order/MethodDropDown';
+import { API } from '../../config';
 
 const clientKey = process.env.REACT_APP_CLIENT_KEY;
 const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
 
 const Order = () => {
   const [orderMethod, setOrderMethod] = useState('');
+  const [userPoint, setUserPoint] = useState(0);
   const [orderItems, setOrderItems] = useState({
     id: 0,
     image_url: '',
@@ -18,45 +20,45 @@ const Order = () => {
     point: 0,
   });
 
-  const { bookId } = useParams();
+  const params = useParams();
+  const bookId = params.id;
 
-  const moveToBookshelf = useNavigate('/bookshelf');
+  const navigate = useNavigate();
 
-  const { id, image_url, title, author, online_price, point } = orderItems;
+  const { id, image_url, title, author, online_price } = orderItems;
 
-  const itemPrice = online_price.toLocaleString('ko-KR');
-  const orderBalance = (point - online_price).toLocaleString('ko-KR');
+  const itemPrice = Number(online_price).toLocaleString('ko-KR');
+  const orderBalance = (userPoint - online_price).toLocaleString('ko-KR');
 
   useEffect(() => {
-    fetch(`http://10.58.52.153:3000/orders/${bookId}`, {
+    fetch(`${API.order}/${bookId}`, {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
-        setOrderItems(data[0]);
+        setOrderItems(data.result[0]);
+        setUserPoint(Number(data.result[1].point));
       });
   }, [bookId]);
 
   const orderWithPoints = () => {
-    fetch('http://10.58.52.153:3000/orders', {
+    fetch(`${API.order}`, {
       method: 'POST',
-      headers: {
-        Accept: 'application / json',
-        Authorization: localStorage.getItem('accessToken'),
-      },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({
-        bookId: { id },
-        online_price: { online_price },
+        userId: '1',
+        bookId: '41',
+        onlinePrice: '12500',
       }),
     })
       .then(response => {
-        if (response.ok === true) {
+        if (response.ok) {
           return response.json();
         }
         throw new Error('통신실패');
       })
       .then(data => {
-        moveToBookshelf();
+        navigate('/mylibrary');
       })
 
       .catch(error => console.log(error));
@@ -66,7 +68,7 @@ const Order = () => {
     loadTossPayments(clientKey).then(tossPayments => {
       tossPayments.requestPayment('카드', {
         amount: `${online_price}`,
-        orderId: 'Abcd123_123',
+        orderId: 'HB94EDFsK',
         orderName: `${title}`,
         successUrl: `${redirectUrl}`,
         failUrl: `${redirectUrl}`,
@@ -116,7 +118,7 @@ const Order = () => {
           })}
         </OrderMethodBox>
         {orderMethod === '보유 포인트' && (
-          <MethodDropDown userBalance={point} orderBalance={orderBalance} />
+          <MethodDropDown userBalance={userPoint} orderBalance={orderBalance} />
         )}
         <OrderButton
           onClick={
